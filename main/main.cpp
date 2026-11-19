@@ -58,18 +58,18 @@ extern "C" void app_main(void) {
     panel.fill_rect(16, 4, 10, 10, C(Colors::GREEN));
     panel.fill_rect(28, 4, 10, 10, C(Colors::BLUE));
     panel.draw_line(0, 0, 63, 31, C(Colors::YELLOW));
-    panel.draw_text("Arthur+", 4, 40, C(Colors::MAGENTA), tahomabd_10pt);
-    panel.draw_text("Hello",   2, 15, Hub75::color8(5),   tahomabd_10pt);
+    panel.draw_text("Hello",   2, 15, C(Colors::MAGENTA),   tahomabd_10pt);
+    
     panel.show();                                   // <- аналог rgb.show()
 
     int x = 0;
     while (true) {
-        panel.fill_rect(0, 56, 64, 8, C(Colors::BLACK));
-        panel.fill_rect(x, 58, 6, 4, C(Colors::CYAN));
+        panel.fill_rect(1, 24, 62, 5, C(Colors::BLACK));   // было y=56 — за экраном!
+        panel.fill_rect(x, 24, 6, 5, C(Colors::CYAN));
         panel.show();
         x = (x + 1) % 64;
-        ESP_LOGI("APP", "refresh %.0f Hz, heap %u", panel.fps(),
-                 (unsigned)heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+        //ESP_LOGI("APP", "refresh %.0f Hz, heap %u", panel.fps(),
+        //         (unsigned)heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
         vTaskDelay(pdMS_TO_TICKS(30));
     }
 }
